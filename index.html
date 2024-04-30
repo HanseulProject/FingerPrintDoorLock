@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charaset="UTF-8">
+    <title>HOME NETWORK</title>
+    <link rel ="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <div class ="container">
+        <h2>HOME IoT</h2>
+    </div>
+    <div class="main">
+        <div>
+            <button onclick="inputMode()">InPut</button>
+        </div>
+        <div>
+            <button onclick="outputMode()">OutPut</button>
+        </div>
+    </div>
+    <div="result">
+
+    </div>
+    <script>
+        function inputMode(){
+            fetch("/input/on")
+            .then(response=> response.text())
+            .then(data=>{
+                console.log(data);
+                let result = document.querySelector("#result");
+                if(data=="ok"){
+                    result.innerHTML = "<h1>Activate InputMode</h1>";
+                }
+                else{
+                    result.innerHTML = "<h1>error</h1>";
+                }
+            });
+        }
+        function outputMode(){
+            fetch("/output/on")
+            .then(response=>response.text())
+            .then(data=>{
+                console.log(data);
+                let result = document.querySelector("#result");
+                if(data=="ok"){
+                    result.innerHTML ="<h1>lED is stopping</h1>";
+                }
+                else{
+                    result.innerHTML ="<h1>error</h1>";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
